@@ -1,0 +1,137 @@
+<!-- File: store/templates/store/cart.html -->
+{% extends "base.html" %}
+
+{% block title %}Your Cart – Stationery{% endblock %}
+
+{% block content %}
+  <h2 class="text-3xl font-bold text-center text-blue-700 mb-8">🛒 Your Cart</h2>
+
+  {% if cart_items %}
+    <div class="bg-white shadow-md rounded-lg divide-y">
+      {% for item in cart_items %}
+        <div class="flex flex-col md:flex-row items-center justify-between p-4 gap-4">
+          <!-- Product Info -->
+          <div class="flex items-center gap-4 flex-1">
+            {% if item.product.image %}
+              <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}"
+                   class="w-20 h-20 object-cover rounded-md border" />
+            {% else %}
+              <div class="w-20 h-20 bg-gray-100 rounded flex items-center justify-center text-gray-400 text-xs border">
+                No Image
+              </div>
+            {% endif %}
+            <div>
+              <h3 class="text-lg font-semibold">{{ item.product.name }}</h3>
+              <p class="text-sm text-gray-500">{{ item.product.description|truncatewords:12 }}</p>
+              {% if item.product.discount_percentage %}
+                <div class="mt-1">
+                    <span class="text-sm text-gray-400 line-through">Rs {{ item.product.price }}</span>
+                    <span class="text-green-600 font-bold ml-2">
+                    Rs {{ item.product.get_final_price|floatformat:2 }}
+                    </span>
+                    <span class="text-xs text-red-600 font-medium ml-2">
+                    ({{ item.product.discount_percentage }}% off)
+                    </span>
+                </div>
+                {% else %}
+                <p class="text-green-600 font-bold mt-1">Rs {{ item.product.price }}</p>
+                {% endif %}
+
+            </div>
+          </div>
+
+          <!-- Controls -->
+          <div class="flex flex-col md:flex-row md:items-center gap-4">
+            <!-- Quantity Update -->
+            <form method="post" action="{% url 'store:update_cart_item' item.product.id %}"
+                  class="flex items-center gap-2">
+              {% csrf_token %}
+              <label for="quantity_{{ item.product.id }}" class="text-sm font-medium">Qty:</label>
+              <input type="number"
+                     name="quantity"
+                     id="quantity_{{ item.product.id }}"
+                     value="{{ item.quantity }}"
+                     min="1"
+                     max="99"
+                     class="w-16 px-2 py-1 border rounded text-center shadow-sm">
+              <button type="submit"
+                      class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 text-sm transition">
+                Update
+              </button>
+            </form>
+
+            <!-- Remove -->
+            <a href="{% url 'store:remove_from_cart' item.product.id %}"
+               class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 text-sm transition"
+               onclick="return confirm('Remove this item from cart?')">
+              Remove
+            </a>
+          </div>
+
+          <!-- Item Total -->
+          <div class="text-right min-w-[100px]">
+            <span class="text-sm text-gray-600 font-medium">Subtotal:</span>
+            <div class="text-lg font-bold text-green-600">RS {{ item.total_price|floatformat:2 }}</div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <!-- Summary -->
+    <div class="mt-8 bg-yellow-50 p-6 rounded-lg shadow-sm border border-yellow-100">
+      <div class="flex justify-between items-center mb-2">
+        <span class="text-lg font-medium">🧺 Total Items:</span>
+        <span class="font-semibold text-blue-700">{{ cart_count }}</span>
+      </div>
+      <div class="flex justify-between items-center text-base pt-2 border-t">
+        <span>Subtotal:</span>
+        <span class="font-medium text-gray-800">Rs {{ subtotal|floatformat:2 }}</span>
+        </div>
+        <div class="flex justify-between items-center text-base mt-1">
+        <span>Delivery Charges:</span>
+        <span class="font-medium text-gray-800">
+            {% if delivery_charge == 0 %}
+            Free
+            {% else %}
+            Rs {{ delivery_charge|floatformat:2 }}
+            {% endif %}
+        </span>
+        </div>
+        <div class="flex justify-between items-center text-xl font-bold mt-2 border-t pt-2">
+        <span>Total Amount:</span>
+        <span class="text-green-700">Rs {{ grand_total|floatformat:2 }}</span>
+        </div>
+
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="mt-6 flex flex-col sm:flex-row gap-4 justify-between">
+      <a href="{% url 'store:home' %}"
+         class="bg-gray-500 text-white px-6 py-3 rounded hover:bg-gray-600 transition text-center">
+        ← Continue Shopping
+      </a>
+      <a href="{% url 'store:checkout' %}"
+         class="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700 transition text-center">
+        Proceed to Checkout →
+      </a>
+    </div>
+
+  {% else %}
+    <!-- Empty Cart View -->
+    <div class="text-center py-16 bg-white rounded-lg shadow-sm">
+      <div class="mb-6">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24 text-gray-300 mx-auto" fill="none"
+             viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9m5-9v9m4-9v9m4-9l2 9"/>
+        </svg>
+      </div>
+      <h3 class="text-2xl font-semibold text-gray-700 mb-2">Oops! Your cart is empty</h3>
+      <p class="text-gray-500 mb-6">Looks like you haven't added anything yet. Let’s fix that!</p>
+      <a href="{% url 'store:home' %}"
+         class="bg-blue-500 text-white px-6 py-3 rounded hover:bg-blue-600 transition">
+        🛍️ Start Shopping
+      </a>
+    </div>
+  {% endif %}
+{% endblock %}

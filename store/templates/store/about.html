@@ -1,0 +1,34 @@
+<!-- File: store/templates/store/about.html -->
+{% extends "base.html" %}
+
+{% block title %}About Us – Scribi{% endblock %}
+
+{% block content %}
+<section class="min-h-screen bg-gradient-to-br from-rose-50 via-pink-50 to-indigo-50 py-16 px-6">
+  <div class="max-w-4xl mx-auto bg-white/90 backdrop-blur-lg p-10 rounded-3xl shadow-xl ring-1 ring-rose-100">
+    <h1 class="text-4xl font-extrabold text-center text-pink-600 mb-8 tracking-tight">About Us</h1>
+
+    <p class="mb-5 text-gray-700 text-lg leading-relaxed">
+      Welcome to <span class="font-semibold text-pink-500">Scribi Store</span> – your trusted destination for high-quality, affordable, and beautifully designed stationery essentials. Whether you're a student, artist, or working professional, we know that the right tools make all the difference.
+    </p>
+
+    <p class="mb-5 text-gray-700 text-lg leading-relaxed">
+      From elegant notebooks and vibrant pens to practical office tools and creative supplies, our curated collection reflects our love for details and design. We strive to offer products that bring joy to your desk, backpack, or studio.
+    </p>
+
+    <p class="mb-5 text-gray-700 text-lg leading-relaxed">
+      Our mission is simple: provide you with premium stationery backed by friendly service and a seamless shopping experience. We’re a small, passionate team that believes in the power of creativity — and we're here to support yours.
+    </p>
+
+    <p class="text-gray-700 text-lg leading-relaxed">
+      Thank you for supporting our journey and choosing <span class="font-semibold text-pink-500">Scribi Store</span> for all your stationery needs. Have a question or suggestion? <a href="{% url 'store:contact' %}" class="text-pink-600 hover:underline font-medium">Reach out to us</a> anytime.
+    </p>
+
+    <div class="mt-10 text-center">
+      <a href="{% url 'store:contact' %}" class="inline-block bg-pink-500 text-white px-6 py-3 rounded-xl font-medium shadow hover:bg-pink-600 transition-all duration-300">
+        Contact Us
+      </a>
+    </div>
+  </div>
+</section>
+{% endblock %}

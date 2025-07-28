@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}Checkout – Stationery{% endblock %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+  <h2 class="text-3xl font-bold mb-8 text-center">Checkout</h2>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+    
+    <!-- Order Summary -->
+    <div class="bg-white p-6 rounded-2xl shadow-md border">
+      <h3 class="text-2xl font-semibold mb-6 border-b pb-2">Order Summary</h3>
+
+      {% for item in cart_items %}
+      <div class="flex justify-between items-center py-4 border-b">
+        <div>
+          <p class="font-medium text-lg">{{ item.product.name }}</p>
+          <p class="text-sm text-gray-500">Quantity: {{ item.quantity }}</p>
+        </div>
+        <p class="text-lg font-semibold">RS {{ item.total_price|floatformat:2 }}</p>
+      </div>
+      {% endfor %}
+
+      <div class="flex justify-between items-center pt-6 text-xl font-bold">
+        <span>Total:</span>
+        <span class="text-green-600">RS {{ total|floatformat:2 }}</span>
+      </div>
+    </div>
+
+    <!-- Shipping Information -->
+    <div class="bg-white p-6 rounded-2xl shadow-md border">
+      <h3 class="text-2xl font-semibold mb-6 border-b pb-2">Shipping Information</h3>
+      <form method="post" class="space-y-5">
+        {% csrf_token %}
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {% for field in form %}
+          <div>
+            <label for="{{ field.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
+              {{ field.label }}
+            </label>
+            {{ field }}
+            {% if field.errors %}
+            <p class="text-sm text-red-500 mt-1">{{ field.errors.as_text }}</p>
+            {% endif %}
+          </div>
+          {% endfor %}
+        </div>
+
+        <button type="submit"
+                class="w-full mt-6 bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition font-semibold"
+                onclick="return confirm('Confirm your order?')">
+          Place Order
+        </button>
+      </form>
+
+      <div class="mt-6 text-center">
+        <a href="{% url 'store:cart' %}" class="text-blue-600 hover:underline">
+          ← Back to Cart
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  input, textarea, select {
+    width: 100%;
+    padding: 0.6rem;
+    border-radius: 0.5rem;
+    border: 1px solid #D1D5DB;
+    background-color: #F9FAFB;
+    margin-top: 0.25rem;
+    font-size: 0.95rem;
+  }
+
+  input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: #10B981;
+    box-shadow: 0 0 0 2px #10B98133;
+    background-color: white;
+  }
+</style>
+{% endblock %}

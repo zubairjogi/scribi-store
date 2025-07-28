@@ -1,0 +1,115 @@
+<!-- File: store/templates/store/order_confirmation.html -->
+{% extends "base.html" %}
+
+{% block title %}Order Confirmation – Stationery{% endblock %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto px-4 py-10 bg-[#FDF6F0] rounded-2xl shadow-lg">
+
+  <!-- Success Icon -->
+  <div class="flex justify-center mb-6">
+    <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center shadow-inner">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+      </svg>
+    </div>
+  </div>
+
+  <!-- Confirmation Text -->
+  <div class="text-center">
+    <h2 class="text-3xl font-bold text-[#1E3A8A] mb-2">Your Order is Confirmed!</h2>
+    <p class="text-[#4B5563] mb-8">Thanks for shopping with us. Your stationery goodies will be packed with care!</p>
+  </div>
+
+  <!-- Order Summary -->
+  <div class="bg-white p-6 rounded-xl shadow-md border border-orange-100">
+    <h3 class="text-xl font-semibold mb-4 text-[#1E3A8A] border-b pb-2">📦 Order Summary</h3>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6 text-sm">
+      <div>
+        <p class="text-gray-500">Order ID</p>
+        <p class="font-medium text-[#1F2937]">#{{ order.order_id }}</p>
+      </div>
+      <div>
+        <p class="text-gray-500">Status</p>
+        <span class="inline-block px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs font-medium">
+          {{ order.get_status_display }}
+        </span>
+      </div>
+      <div>
+        <p class="text-gray-500">Order Date</p>
+        <p class="font-medium text-[#1F2937]">{{ order.created_at|date:"M d, Y" }}</p>
+      </div>
+      <div>
+  <p class="text-gray-500">Subtotal</p>
+  <p class="font-medium text-[#1F2937]">Rs {{ subtotal|floatformat:2 }}</p>
+</div>
+<div>
+  <p class="text-gray-500">Delivery Charge</p>
+  <p class="font-medium text-[#1F2937]">
+    {% if order.delivery_charge == 0 %}
+      Free
+    {% else %}
+      Rs {{ order.delivery_charge|floatformat:2 }}
+    {% endif %}
+  </p>
+</div>
+<div>
+  <p class="text-gray-500">Total</p>
+  <p class="font-medium text-green-600">Rs {{ order.total_price|floatformat:2 }}</p>
+</div>
+
+    </div>
+
+    <!-- Ordered Items -->
+    <!-- Ordered Items -->
+    <div class="mb-6">
+    <h4 class="font-semibold mb-2 text-[#374151]">📝 Items Ordered</h4>
+    <div class="divide-y divide-dashed text-sm text-[#374151]">
+        {% for item in order.order_items.all %}
+        <div class="flex justify-between py-2">
+            <span>{{ item.product.name }} × {{ item.quantity }}</span>
+
+            {% if item.discount_price %}
+            <span>
+                <del class="text-red-500">Rs {{ item.price }}</del>
+                <span class="text-green-600 font-semibold">
+                Rs {{ item.discount_price }} × {{ item.quantity }}
+                </span>
+            </span>
+            {% else %}
+            <span>Rs {{ item.price }} × {{ item.quantity }}</span>
+            {% endif %}
+        </div>
+        {% endfor %}
+
+    </div>
+    </div>
+
+
+    <!-- Shipping Address -->
+    <div>
+      <h4 class="font-semibold mb-2 text-[#374151]">🏠 Shipping Address</h4>
+      <p class="text-sm leading-relaxed text-[#4B5563]">
+        {{ order.full_name }}<br>
+        {{ order.complete_address }}<br>
+        {{ order.city }}, {{ order.postal_code }}<br>
+        {{ order.country }}
+      </p>
+    </div>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="mt-8 flex flex-col sm:flex-row justify-center gap-4">
+    <a href="{% url 'store:home' %}"
+       class="bg-[#1E3A8A] text-white px-6 py-3 rounded-xl hover:bg-[#1B2D6D] transition shadow-md text-center">
+      🛍 Continue Shopping
+    </a>
+    <a href="{% url 'store:order_history' %}"
+       class="bg-[#4B5563] text-white px-6 py-3 rounded-xl hover:bg-[#374151] transition shadow-md text-center">
+      📂 View Order History
+    </a>
+  </div>
+
+</div>
+{% endblock %}

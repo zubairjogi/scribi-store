@@ -1,0 +1,69 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.so
+
+# Django
+*.log
+*.pot
+*.pyc
+db.sqlite3
+*.sqlite3
+local_settings.py
+.env
+.env.*
+
+# Migrations
+**/migrations/
+!*/migrations/__init__.py
+
+# VS Code
+.vscode/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Node / front-end
+node_modules/
+build/
+dist/
+*.tgz
+
+# Git
+*.swp
+*.bak
+*.tmp
+
+
+# pip
+pip-log.txt
+pip-delete-this-directory.txt
+
+# coverage/test
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# Pytest
+.pytest_cache/
+
+# Jupyter Notebooks
+.ipynb_checkpoints
+
+# Docker
+*.pid
+*.pid.lock

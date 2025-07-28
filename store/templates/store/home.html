@@ -1,0 +1,611 @@
+<!-- File: store/templates/store/home.html -->
+{% extends "base.html" %}
+{% load tz %}
+
+{% block title %}Home – Stationery{% endblock %}
+
+{% block content %}
+<!-- Hero Section with Rotating Images -->
+<section class="relative overflow-hidden rounded-3xl mb-16 shadow-2xl">
+  <div class="hero-slider relative h-96 md:h-[500px] lg:h-[600px]">
+<!-- Slide 1 -->
+<div class="hero-slide active absolute inset-0 bg-gradient-to-br from-pink-400 via-purple-500 to-indigo-600">
+  <div class="absolute inset-0 bg-black/20"></div>
+  <div class="relative z-10 h-full flex items-center justify-center px-4 sm:px-6">
+    <div class="w-full max-w-4xl text-left sm:text-center animate-fade-in">
+      <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 sm:mb-6 leading-tight">
+        ✨ Magical Stationery
+      </h1>
+      <p class="text-lg sm:text-xl md:text-2xl text-white/90 mb-6 sm:mb-8 max-w-2xl">
+        Transform your creativity with our premium collection of colorful pens, notebooks, and art supplies
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-start sm:justify-center">
+        <a href="#categories" class="w-full sm:w-auto bg-white hover:bg-gray-100 text-purple-700 px-6 py-3 sm:px-8 sm:py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+          🛍️ Explore Collection
+        </a>
+        <a href="#featured" class="w-full sm:w-auto border-2 border-white text-white hover:bg-white hover:text-purple-700 px-6 py-3 sm:px-8 sm:py-4 rounded-full text-lg font-semibold transition-all duration-300">
+          ⭐ Featured Items
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 2 -->
+<div class="hero-slide absolute inset-0 bg-gradient-to-br from-emerald-400 via-teal-500 to-blue-600">
+  <div class="absolute inset-0 bg-black/20"></div>
+  <div class="relative z-10 h-full flex items-center justify-center px-4 sm:px-6">
+    <div class="w-full max-w-4xl text-left sm:text-center animate-fade-in">
+      <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 sm:mb-6 leading-tight">
+        🎨 Creative Paradise
+      </h1>
+      <p class="text-lg sm:text-xl md:text-2xl text-white/90 mb-6 sm:mb-8 max-w-2xl">
+        Unleash your imagination with premium art supplies and vibrant stationery essentials
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-start sm:justify-center">
+        <a href="#categories" class="w-full sm:w-auto bg-white hover:bg-gray-100 text-teal-700 px-6 py-3 sm:px-8 sm:py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+          🎯 Shop Art Supplies
+        </a>
+        <a href="#special-offers" class="w-full sm:w-auto border-2 border-white text-white hover:bg-white hover:text-teal-700 px-6 py-3 sm:px-8 sm:py-4 rounded-full text-lg font-semibold transition-all duration-300">
+          💫 Special Offers
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 3 -->
+<div class="hero-slide absolute inset-0 bg-gradient-to-br from-orange-400 via-red-500 to-pink-600">
+  <div class="absolute inset-0 bg-black/20"></div>
+  <div class="relative z-10 h-full flex items-center justify-center px-4 sm:px-6">
+    <div class="w-full max-w-4xl text-left sm:text-center animate-fade-in">
+      <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 sm:mb-6 leading-tight">
+        📚 Study in Style
+      </h1>
+      <p class="text-lg sm:text-xl md:text-2xl text-white/90 mb-6 sm:mb-8 max-w-2xl">
+        Make studying fun with our cute notebooks, planners, and organizational tools
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-start sm:justify-center">
+        <a href="#categories" class="w-full sm:w-auto bg-white hover:bg-gray-100 text-red-700 px-6 py-3 sm:px-8 sm:py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+          📖 Study Essentials
+        </a>
+        <a href="#new-arrivals" class="w-full sm:w-auto border-2 border-white text-white hover:bg-white hover:text-red-700 px-6 py-3 sm:px-8 sm:py-4 rounded-full text-lg font-semibold transition-all duration-300">
+          🆕 New Arrivals
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- Navigation Dots -->
+    <div class="absolute bottom-3 sm:bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-3 z-20">
+    <button class="hero-dot active w-4 h-4 rounded-full bg-white/80 hover:bg-white transition-all duration-300" data-slide="0"></button>
+    <button class="hero-dot w-4 h-4 rounded-full bg-white/40 hover:bg-white/80 transition-all duration-300" data-slide="1"></button>
+    <button class="hero-dot w-4 h-4 rounded-full bg-white/40 hover:bg-white/80 transition-all duration-300" data-slide="2"></button>
+    </div>
+
+  </div>
+</section>
+
+<!-- Features Section -->
+<section class="mb-16">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div class="text-center p-8 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+      <div class="w-16 h-16 bg-gradient-to-br from-pink-400 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
+        <span class="text-2xl">🚚</span>
+      </div>
+      <h3 class="text-xl font-semibold text-gray-800 mb-2">Free Delivery</h3>
+      <p class="text-gray-600">Fast & free shipping on orders over Rs 1000</p>
+    </div>
+    
+    <div class="text-center p-8 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+      <div class="w-16 h-16 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-full flex items-center justify-center mx-auto mb-4">
+        <span class="text-2xl">⭐</span>
+      </div>
+      <h3 class="text-xl font-semibold text-gray-800 mb-2">Premium Quality</h3>
+      <p class="text-gray-600">Carefully selected high-quality products</p>
+    </div>
+    
+    <div class="text-center p-8 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+      <div class="w-16 h-16 bg-gradient-to-br from-orange-400 to-red-500 rounded-full flex items-center justify-center mx-auto mb-4">
+        <span class="text-2xl">💝</span>
+      </div>
+      <h3 class="text-xl font-semibold text-gray-800 mb-2">Gift Ready</h3>
+      <p class="text-gray-600">Beautiful packaging for every order</p>
+    </div>
+  </div>
+</section>
+
+<!-- Categories Section -->
+<section id="categories" class="mb-16">
+  <div class="text-center mb-12">
+    <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+      🗂️ Our Amazing Collections
+    </h2>
+    <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+      Discover our carefully curated collection of premium stationery items
+    </p>
+  </div>
+  
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+    {% for c in categories %}
+      <a href="{% url 'store:category_detail' c.slug %}"
+         class="group block bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden transform hover:-translate-y-3 hover:scale-105">
+        <div class="relative overflow-hidden">
+          {% if c.image %}
+            <img src="{{ c.image.url }}" alt="{{ c.name }}"
+                 class="w-full h-60 object-contain group-hover:scale-110 transition-transform duration-500">
+          {% else %}
+            <div class="w-full h-48 bg-gradient-to-br from-pink-200 via-purple-200 to-blue-200 flex items-center justify-center">
+              <span class="text-6xl">📝</span>
+            </div>
+          {% endif %}
+          <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        </div>
+        
+        <div class="p-6">
+          <h3 class="text-2xl font-semibold text-gray-800 group-hover:text-pink-600 transition-colors duration-300 mb-2">
+            {{ c.name }}
+          </h3>
+          <p class="text-gray-600 group-hover:text-gray-700 transition-colors duration-300">
+            Explore our {{ c.name|lower }} collection
+          </p>
+          <div class="mt-4 flex items-center text-pink-500 group-hover:text-pink-600 font-medium">
+            <span>Shop Now</span>
+            <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+            </svg>
+          </div>
+        </div>
+      </a>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- Popular Products Showcase -->
+<section id="popular-products" class="mb-16">
+  <div class="text-center mb-12">
+    <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+      🌟 Most Loved Products
+    </h2>
+    <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+      Discover what our customers can't stop buying!
+    </p>
+  </div>
+  
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+    <!-- Sample Product 1 -->
+    <div class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden transform hover:-translate-y-3">
+      <div class="relative overflow-hidden bg-gradient-to-br from-pink-100 to-purple-100 h-48 flex items-center justify-center">
+        <span class="text-6xl group-hover:scale-110 transition-transform duration-300">🖊️</span>
+        <div class="absolute top-3 right-3 bg-red-500 text-white text-xs px-2 py-1 rounded-full font-semibold">
+          Bestseller
+        </div>
+      </div>
+      <div class="p-4">
+        <h3 class="text-lg font-semibold text-gray-800 mb-2">Colorful Gel Pens Set</h3>
+        <p class="text-gray-600 text-sm mb-3">12-piece vibrant gel pen collection</p>
+        <!-- <div class="flex items-center justify-between">
+          <span class="text-xl font-bold text-pink-600">$15.99</span>
+          <button class="bg-pink-500 hover:bg-pink-600 text-white px-3 py-1 rounded-full text-sm transition-colors duration-300">
+            Add to Cart
+          </button>
+        </div> -->
+      </div>
+    </div>
+
+    <!-- Sample Product 2 -->
+    <div class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden transform hover:-translate-y-3">
+      <div class="relative overflow-hidden bg-gradient-to-br from-blue-100 to-indigo-100 h-48 flex items-center justify-center">
+        <span class="text-6xl group-hover:scale-110 transition-transform duration-300">📓</span>
+        <div class="absolute top-3 right-3 bg-green-500 text-white text-xs px-2 py-1 rounded-full font-semibold">
+          Popular
+        </div>
+      </div>
+      <div class="p-4">
+        <h3 class="text-lg font-semibold text-gray-800 mb-2">Cute Diary Journal</h3>
+        <p class="text-gray-600 text-sm mb-3">A5 dotted pages with lock</p>
+        <!-- <div class="flex items-center justify-between">
+          <span class="text-xl font-bold text-blue-600">$12.50</span>
+          <button class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-full text-sm transition-colors duration-300">
+            Add to Cart
+          </button>
+        </div> -->
+      </div>
+    </div>
+
+    <!-- Sample Product 3 -->
+    <div class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden transform hover:-translate-y-3">
+      <div class="relative overflow-hidden bg-gradient-to-br from-green-100 to-emerald-100 h-48 flex items-center justify-center">
+        <span class="text-6xl group-hover:scale-110 transition-transform duration-300">🎨</span>
+        <div class="absolute top-3 right-3 bg-orange-500 text-white text-xs px-2 py-1 rounded-full font-semibold">
+          New
+        </div>
+      </div>
+      <div class="p-4">
+        <h3 class="text-lg font-semibold text-gray-800 mb-2">Art Supplies Kit</h3>
+        <p class="text-gray-600 text-sm mb-3">Complete coloring set for artists</p>
+        <!-- <div class="flex items-center justify-between">
+          <span class="text-xl font-bold text-green-600">$24.99</span>
+          <button class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-full text-sm transition-colors duration-300">
+            Add to Cart
+          </button>
+        </div> -->
+      </div>
+    </div>
+
+    <!-- Sample Product 4 -->
+    <div class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden transform hover:-translate-y-3">
+      <div class="relative overflow-hidden bg-gradient-to-br from-yellow-100 to-orange-100 h-48 flex items-center justify-center">
+        <span class="text-6xl group-hover:scale-110 transition-transform duration-300">📏</span>
+        <div class="absolute top-3 right-3 bg-purple-500 text-white text-xs px-2 py-1 rounded-full font-semibold">
+          Featured
+        </div>
+      </div>
+      <div class="p-4">
+        <h3 class="text-lg font-semibold text-gray-800 mb-2">Study Essentials Set</h3>
+        <p class="text-gray-600 text-sm mb-3">Ruler, eraser, pencils & more</p>
+        <!-- <div class="flex items-center justify-between">
+          <span class="text-xl font-bold text-orange-600">$8.75</span>
+          <button class="bg-orange-500 hover:bg-orange-600 text-white px-3 py-1 rounded-full text-sm transition-colors duration-300">
+            Add to Cart
+          </button>
+        </div> -->
+      </div>
+    </div>
+  </div>
+
+  <div class="text-center mt-10">
+    <a href="#categories" class="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white px-8 py-3 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+      View All Products →
+    </a>
+  </div>
+</section>
+
+<!-- Student Testimonials Section -->
+<section class="mb-16">
+  <div class="text-center mb-12">
+    <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+      💬 What Our Students Say
+    </h2>
+    <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+      Real reviews from happy customers who love our products
+    </p>
+  </div>
+  
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div class="bg-white rounded-2xl shadow-lg p-8 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+      <div class="flex items-center mb-4">
+        <div class="w-12 h-12 bg-gradient-to-br from-pink-400 to-purple-500 rounded-full flex items-center justify-center">
+          <span class="text-white font-bold">A</span>
+        </div>
+        <div class="ml-4">
+          <h4 class="font-semibold text-gray-800">Aniya Malik</h4>
+          <div class="flex text-yellow-400">
+            ⭐⭐⭐⭐⭐
+          </div>
+        </div>
+      </div>
+      <p class="text-gray-600 italic">
+        "Amazing quality pens! My handwriting looks so much better now. The colors are so vibrant and they last really long!"
+      </p>
+    </div>
+    
+    <div class="bg-white rounded-2xl shadow-lg p-8 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+      <div class="flex items-center mb-4">
+        <div class="w-12 h-12 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-full flex items-center justify-center">
+          <span class="text-white font-bold">M</span>
+        </div>
+        <div class="ml-4">
+          <h4 class="font-semibold text-gray-800">Muhammad Ali</h4>
+          <div class="flex text-yellow-400">
+            ⭐⭐⭐⭐⭐
+          </div>
+        </div>
+      </div>
+      <p class="text-gray-600 italic">
+        "Perfect for my university notes! The notebooks are so cute and the paper quality is excellent. Highly recommended!"
+      </p>
+    </div>
+    
+    <div class="bg-white rounded-2xl shadow-lg p-8 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+      <div class="flex items-center mb-4">
+        <div class="w-12 h-12 bg-gradient-to-br from-orange-400 to-red-500 rounded-full flex items-center justify-center">
+          <span class="text-white font-bold">F</span>
+        </div>
+        <div class="ml-4">
+          <h4 class="font-semibold text-gray-800">Fatima Ahmed</h4>
+          <div class="flex text-yellow-400">
+            ⭐⭐⭐⭐⭐
+          </div>
+        </div>
+      </div>
+      <p class="text-gray-600 italic">
+        "Fast delivery and beautiful packaging! My daughter loves all the colorful stationery items. Will order again!"
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Product Categories Preview -->
+<section class="mb-16">
+  <div class="bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100 rounded-3xl p-12">
+    <div class="text-center mb-12">
+      <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+        🎯 Find Exactly What You Need
+      </h2>
+      <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+        Browse by category to discover the perfect stationery for every occasion
+      </p>
+    </div>
+    
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+      <div class="text-center group cursor-pointer">
+        <div class="w-20 h-20 bg-gradient-to-br from-pink-400 to-rose-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg">
+          <span class="text-3xl">✏️</span>
+        </div>
+        <h3 class="font-semibold text-gray-800 group-hover:text-pink-600 transition-colors duration-300">Writing</h3>
+        <p class="text-sm text-gray-600">Pens & Pencils</p>
+      </div>
+      
+      <div class="text-center group cursor-pointer">
+        <div class="w-20 h-20 bg-gradient-to-br from-blue-400 to-indigo-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg">
+          <span class="text-3xl">📚</span>
+        </div>
+        <h3 class="font-semibold text-gray-800 group-hover:text-blue-600 transition-colors duration-300">Notebooks</h3>
+        <p class="text-sm text-gray-600">Journals & Diaries</p>
+      </div>
+      
+      <div class="text-center group cursor-pointer">
+        <div class="w-20 h-20 bg-gradient-to-br from-green-400 to-emerald-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg">
+          <span class="text-3xl">🎨</span>
+        </div>
+        <h3 class="font-semibold text-gray-800 group-hover:text-green-600 transition-colors duration-300">Art Supplies</h3>
+        <p class="text-sm text-gray-600">Colors & Brushes</p>
+      </div>
+      
+      <div class="text-center group cursor-pointer">
+        <div class="w-20 h-20 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg">
+          <span class="text-3xl">📐</span>
+        </div>
+        <h3 class="font-semibold text-gray-800 group-hover:text-orange-600 transition-colors duration-300">Tools</h3>
+        <p class="text-sm text-gray-600">Rulers & Erasers</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="mb-16">
+  <div class="text-center mb-12">
+    <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+      💖 Why Students Love Us
+    </h2>
+    <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+      Join thousands of happy customers who trust us for their stationery needs
+    </p>
+  </div>
+  
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+    <div class="text-center group">
+      <div class="w-20 h-20 bg-gradient-to-br from-pink-400 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+        <span class="text-3xl">🌈</span>
+      </div>
+      <h3 class="text-xl font-semibold text-gray-800 mb-2">Colorful Collection</h3>
+      <p class="text-gray-600">Vibrant colors that inspire creativity</p>
+    </div>
+    
+    <div class="text-center group">
+      <div class="w-20 h-20 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+        <span class="text-3xl">💯</span>
+      </div>
+      <h3 class="text-xl font-semibold text-gray-800 mb-2">Best Quality</h3>
+      <p class="text-gray-600">Durable products that last longer</p>
+    </div>
+    
+    <div class="text-center group">
+      <div class="w-20 h-20 bg-gradient-to-br from-orange-400 to-red-500 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+        <span class="text-3xl">⚡</span>
+      </div>
+      <h3 class="text-xl font-semibold text-gray-800 mb-2">Fast Delivery</h3>
+      <p class="text-gray-600">Quick shipping to your doorstep</p>
+    </div>
+    
+    <div class="text-center group">
+      <div class="w-20 h-20 bg-gradient-to-br from-blue-400 to-indigo-500 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+        <span class="text-3xl">🤝</span>
+      </div>
+      <h3 class="text-xl font-semibold text-gray-800 mb-2">Great Support</h3>
+      <p class="text-gray-600">Friendly customer service team</p>
+    </div>
+  </div>
+</section>
+
+<!-- Call to Action -->
+<section class="text-center">
+  <div class="bg-gradient-to-r from-pink-100 via-purple-100 to-indigo-100 rounded-3xl p-12">
+    <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+      Ready to Start Your Creative Journey?
+    </h2>
+    <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+      Join our community of creative minds and discover the joy of beautiful stationery
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="#categories" class="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+        🛍️ Start Shopping
+      </a>
+      <a href="{% url 'store:contact' %}" class="border-2 border-gray-400 text-gray-700 hover:bg-gray-100 px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300">
+        💬 Contact Us
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.8s ease-out;
+}
+
+.hero-slide {
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.hero-slide.active {
+  opacity: 1;
+}
+
+.hero-dot.active {
+  background-color: white !important;
+  transform: scale(1.2);
+}
+
+/* Floating animation for decorative elements */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Gradient text animation */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.gradient-animate {
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient 4s ease infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+</style>
+
+<script>
+// Hero slider functionality
+document.addEventListener('DOMContentLoaded', function() {
+  const slides = document.querySelectorAll('.hero-slide');
+  const dots = document.querySelectorAll('.hero-dot');
+  let currentSlide = 0;
+
+  function showSlide(index) {
+    // Hide all slides
+    slides.forEach(slide => slide.classList.remove('active'));
+    dots.forEach(dot => dot.classList.remove('active'));
+    
+    // Show current slide
+    slides[index].classList.add('active');
+    dots[index].classList.add('active');
+  }
+
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+  }
+
+  // Auto-advance slides
+  setInterval(nextSlide, 5000);
+
+  // Dot navigation
+  dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      currentSlide = index;
+      showSlide(currentSlide);
+    });
+  });
+
+  // Smooth scrolling for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
+
+  // Add scroll animations
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, observerOptions);
+
+  // Observe all sections for scroll animations
+  document.querySelectorAll('section').forEach(section => {
+    section.style.opacity = '0';
+    section.style.transform = 'translateY(30px)';
+    section.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+    observer.observe(section);
+  });
+
+  // Counter animation
+  function animateCounter(counter) {
+    const target = parseInt(counter.getAttribute('data-target'));
+    const increment = target / 100;
+    let current = 0;
+    
+    const updateCounter = () => {
+      if (current < target) {
+        current += increment;
+        counter.textContent = Math.floor(current);
+        setTimeout(updateCounter, 20);
+      } else {
+        counter.textContent = target;
+      }
+    };
+    
+    updateCounter();
+  }
+
+  // Trigger counter animations when stats section is visible
+  const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const counters = entry.target.querySelectorAll('.counter');
+        counters.forEach(counter => {
+          if (!counter.classList.contains('animated')) {
+            counter.classList.add('animated');
+            animateCounter(counter);
+          }
+        });
+      }
+    });
+  }, { threshold: 0.5 });
+
+  // Observe the stats section
+  const statsSection = document.querySelector('.counter').closest('section');
+  if (statsSection) {
+    statsObserver.observe(statsSection);
+  }
+});
+</script>
+
+{% endblock %}

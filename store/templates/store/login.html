@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Login – Stationery{% endblock %}
+
+{% block content %}
+<div class="max-w-md mx-auto bg-white p-8 rounded-2xl shadow-lg border border-pink-100">
+  <h2 class="text-3xl font-bold text-center text-pink-600 mb-6">👋 Welcome Back!</h2>
+
+  <form method="post" class="space-y-5">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+
+    <!-- Username -->
+    <div>
+      <label for="id_username" class="block mb-1 font-medium text-gray-700">Username</label>
+      <input type="text" name="username" id="id_username"
+             class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-pink-300 focus:outline-none transition"
+             value="{{ form.username.value|default:'' }}">
+      <p class="text-red-500 text-sm">{{ form.username.errors }}</p>
+    </div>
+
+    <!-- Password -->
+    <div>
+      <label for="id_password" class="block mb-1 font-medium text-gray-700">Password</label>
+      <input type="password" name="password" id="id_password"
+             class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-pink-300 focus:outline-none transition">
+      <p class="text-red-500 text-sm">{{ form.password.errors }}</p>
+    </div>
+
+    <button type="submit"
+            class="w-full bg-pink-500 hover:bg-pink-600 text-white font-medium py-2 rounded-full transition">
+      🚪 Login
+    </button>
+  </form>
+
+  <p class="mt-6 text-center text-sm text-gray-600">
+    Don’t have an account?
+    <a href="{% url 'signup' %}" class="text-green-600 font-medium hover:underline transition">Sign up here</a>.
+  </p>
+</div>
+{% endblock %}

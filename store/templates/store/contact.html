@@ -1,0 +1,71 @@
+<!-- File: store/templates/store/contact.html -->
+{% extends "base.html" %}
+
+{% block title %}Contact Us – Stationery{% endblock %}
+
+{% block content %}
+<section class="min-h-screen bg-gradient-to-br from-rose-50 via-pink-50 to-indigo-50 py-16 px-6 sm:px-10">
+  <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 bg-white shadow-xl rounded-3xl overflow-hidden ring-1 ring-rose-100">
+    
+    <!-- Contact Info -->
+    <div class="bg-gradient-to-tr from-pink-200 to-pink-300 text-gray-800 p-10 flex flex-col justify-between">
+      <div>
+        <h2 class="text-4xl font-bold mb-4">Let’s Connect</h2>
+        <p class="text-pink-900 mb-8 text-lg leading-relaxed">Have a question, suggestion, or want to collaborate? We're all ears!</p>
+        <div class="space-y-6 text-base">
+        <div class="flex items-start gap-3">
+            <i class="fas fa-envelope text-pink-700 w-6 h-6 mt-1"></i>
+            <a href="mailto:storescribi@gmail.com" class="hover:underline text-pink-900">storescribi@gmail.com</a>
+        </div>
+        <div class="flex items-start gap-3">
+            <i class="fab fa-whatsapp text-pink-700 w-6 h-6 mt-1"></i>
+            <a href="https://wa.me/923105819097" target="_blank" class="hover:underline text-pink-900">0310-5819097</a>
+        </div>
+        <div class="flex items-start gap-3">
+            <i class="fas fa-map-marker-alt text-pink-700 w-6 h-6 mt-1"></i>
+            <span class="text-pink-900">Gojra, Pakistan</span>
+        </div>
+        </div>
+
+      </div>
+
+      <div class="mt-10 text-sm text-pink-900/70">&copy; 2025 Scribi</div>
+    </div>
+
+    <!-- Contact Form -->
+    <div class="p-10 bg-white">
+      <h3 class="text-3xl font-semibold text-gray-800 mb-6">Send a Message</h3>
+      <form method="post" action="{% url 'store:contact' %}" class="space-y-8">
+        {% csrf_token %}
+
+        <!-- Floating Label Input -->
+        <div class="relative">
+          <input type="text" name="name" id="name" required
+                 class="peer w-full border-b-2 border-pink-300 bg-transparent placeholder-transparent focus:outline-none focus:border-pink-500 transition-all duration-300 py-2 px-1">
+          <label for="name"
+                 class="absolute left-1 top-2 text-pink-500 text-sm transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-pink-400 peer-focus:top-2 peer-focus:text-sm peer-focus:text-pink-600">Name</label>
+        </div>
+
+        <div class="relative">
+          <input type="email" name="email" id="email" required
+                 class="peer w-full border-b-2 border-pink-300 bg-transparent placeholder-transparent focus:outline-none focus:border-pink-500 transition-all duration-300 py-2 px-1">
+          <label for="email"
+                 class="absolute left-1 top-2 text-pink-500 text-sm transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-pink-400 peer-focus:top-2 peer-focus:text-sm peer-focus:text-pink-600">Email</label>
+        </div>
+
+        <div class="relative">
+          <textarea name="message" id="message" rows="5" required
+                    class="peer w-full border-b-2 border-pink-300 bg-transparent placeholder-transparent focus:outline-none focus:border-pink-500 transition-all duration-300 py-2 px-1 resize-none"></textarea>
+          <label for="message"
+                 class="absolute left-1 top-2 text-pink-500 text-sm transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-pink-400 peer-focus:top-2 peer-focus:text-sm peer-focus:text-pink-600">Message</label>
+        </div>
+
+        <button type="submit"
+                class="w-full bg-pink-500 text-white py-3 px-6 rounded-xl hover:bg-pink-600 transition-all duration-300 text-lg font-medium shadow-md hover:shadow-lg">
+          Send Message
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

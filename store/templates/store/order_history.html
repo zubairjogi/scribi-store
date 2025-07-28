@@ -1,0 +1,105 @@
+<!-- File: store/templates/store/order_history.html -->
+{% extends "base.html" %}
+
+{% block title %}Order History – Stationery{% endblock %}
+
+{% block content %}
+<section class="min-h-screen bg-gradient-to-br from-rose-50 via-pink-50 to-indigo-50 py-8 px-4 sm:px-6 lg:py-16">
+  <div class="max-w-5xl mx-auto bg-white/90 backdrop-blur-lg p-6 sm:p-10 rounded-3xl shadow-xl ring-1 ring-rose-100">
+    <h2 class="text-3xl sm:text-4xl font-extrabold text-center text-pink-600 mb-8 sm:mb-10">Your Order History</h2>
+
+    {% if orders %}
+    <div class="overflow-x-auto">
+      <!-- Desktop Table -->
+      <table class="hidden sm:table min-w-full text-left text-gray-700 text-sm border-collapse">
+        <thead>
+          <tr class="bg-pink-100 text-pink-800 uppercase tracking-wide text-xs font-semibold">
+            <th class="px-4 sm:px-6 py-3">Order ID</th>
+            <th class="px-4 sm:px-6 py-3">Date</th>
+            <th class="px-4 sm:px-6 py-3">Total</th>
+            <th class="px-4 sm:px-6 py-3">Status</th>
+            <th class="px-4 sm:px-6 py-3 text-right">Action</th>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-pink-50">
+          {% for order in orders %}
+          <tr class="hover:bg-rose-50 transition">
+            <td class="px-4 sm:px-6 py-4 font-medium text-pink-700">#{{ order.order_id }}</td>
+            <td class="px-4 sm:px-6 py-4">{{ order.created_at|date:"M d, Y H:i" }}</td>
+            <td class="px-4 sm:px-6 py-4 text-green-700 font-semibold">Rs {{ order.total_price|floatformat:2 }}</td>
+            <td class="px-4 sm:px-6 py-4">
+              <span class="inline-block px-2 py-1 rounded-full text-xs font-medium
+                {% if order.status == 'pending' %}
+                  bg-yellow-100 text-yellow-700
+                {% elif order.status == 'shipped' %}
+                  bg-blue-100 text-blue-700
+                {% elif order.status == 'delivered' %}
+                  bg-green-100 text-green-700
+                {% else %}
+                  bg-gray-100 text-gray-700
+                {% endif %}
+              ">
+                {{ order.get_status_display }}
+              </span>
+            </td>
+            <td class="px-4 sm:px-6 py-4 text-right">
+              <a href="{% url 'store:order_confirmation' order.order_id %}"
+                 class="text-pink-600 hover:underline font-medium">
+                View
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <!-- Mobile Cards -->
+      <div class="sm:hidden space-y-4">
+        {% for order in orders %}
+        <div class="bg-white p-4 rounded-lg shadow-md border border-pink-50">
+          <div class="flex justify-between items-start">
+            <div class="font-medium text-pink-700">#{{ order.order_id }}</div>
+            <span class="inline-block px-2 py-1 rounded-full text-xs font-medium
+              {% if order.status == 'pending' %}
+                bg-yellow-100 text-yellow-700
+              {% elif order.status == 'shipped' %}
+                bg-blue-100 text-blue-700
+              {% elif order.status == 'delivered' %}
+                bg-green-100 text-green-700
+              {% else %}
+                bg-gray-100 text-gray-700
+              {% endif %}
+            ">
+              {{ order.get_status_display }}
+            </span>
+          </div>
+          <div class="mt-2 text-sm text-gray-600">{{ order.created_at|date:"M d, Y H:i" }}</div>
+          <div class="mt-2 font-semibold text-green-700">Rs {{ order.total_price|floatformat:2 }}</div>
+          <div class="mt-3 text-right">
+            <a href="{% url 'store:order_confirmation' order.order_id %}"
+               class="text-pink-600 hover:underline font-medium text-sm">
+              View Details
+            </a>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% else %}
+    <div class="text-center py-12 sm:py-20 text-gray-500">
+      <svg class="mx-auto mb-4 sm:mb-6 w-12 sm:w-16 h-12 sm:h-16 text-pink-300" fill="none" stroke="currentColor" stroke-width="1.5"
+           viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round"
+              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-1.6 8m12.2-8l1.6 8m-6.6-8v8" />
+      </svg>
+      <p class="text-base sm:text-lg">You haven't placed any orders yet.</p>
+      <p class="mt-2">
+        <a href="{% url 'store:home' %}" class="text-pink-600 hover:underline font-medium">
+          Browse products →
+        </a>
+      </p>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}
