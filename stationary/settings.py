@@ -98,7 +98,6 @@ DATABASES = {
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 AUTH_PASSWORD_VALIDATORS = [
@@ -123,10 +122,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.2/howto/static-files/
-STATIC_URL = 'static/'
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
@@ -150,6 +145,7 @@ EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 ADMIN_EMAIL = config('ADMIN_EMAIL')
 
+# AWS Configuration
 AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
@@ -171,8 +167,17 @@ AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
 }
 
+# ==================== STATIC & MEDIA FILES CONFIGURATION ====================
+
+# Static files (CSS, JavaScript, Admin files) - served from S3
+STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # Local collection point before upload to S3
+
+# Media files URL - points to S3
+MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
+
 # ==================== STORAGE CONFIGURATION ====================
-# Modern Django 4.2+ storage configuration (replaces DEFAULT_FILE_STORAGE)
+# Modern Django 4.2+ storage configuration
 STORAGES = {
     'default': {
         'BACKEND': 'store.backends.s3boto3.MediaStorage',
@@ -188,9 +193,18 @@ STORAGES = {
         },
     },
     'staticfiles': {
-        'BACKEND': 'django.contrib.staticfiles.storage.StaticFilesStorage',
+        'BACKEND': 'store.backends.s3boto3.StaticStorage',
     },
 }
 
-# Media files URL - points to S3
-MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
+# ==================== STATICFILES CONFIGURATION ====================
+STATICFILES_DIRS = [
+    BASE_DIR / "static",  # If you have a static folder in your project root
+    # Add other static directories if needed
+]
+
+# Optionally, you can specify which static file finders to use
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+]
