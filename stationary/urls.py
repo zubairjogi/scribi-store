@@ -21,7 +21,7 @@ from django.contrib.auth import views as auth_views
 from store import views as store_views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('scribi-secure-admin-panel-9051/', admin.site.urls),
 
     # Authentication at the root
     path('login/',

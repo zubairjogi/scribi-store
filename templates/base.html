@@ -9,7 +9,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="icon" href="{% static '/store/images/favicon.png' %}" type="image/png">
+  <link rel="icon" href="https://scribi-store-bucket.s3.eu-north-1.amazonaws.com/static/store/images/favicon.png" type="image/png">
   <style>
     body {
       font-family: 'Quicksand', sans-serif;
@@ -23,7 +23,7 @@
     <div class="max-w-7xl mx-auto flex items-center justify-between py-4 px-6">
       <!-- Logo -->
       <a href="{% url 'store:home' %}" class="text-2xl font-bold text-pink-600 flex items-center space-x-2 hover:text-pink-700 transition">
-        <img src="/static/store/images/logo.png" alt="Stationery Logo" class="h-12 rounded-full ">
+        <img src="https://scribi-store-bucket.s3.eu-north-1.amazonaws.com/static/store/images/SCRIBI.png" alt="Stationery Logo" class="h-12 rounded-full ">
         <!-- <span>Scribi</span> -->
       </a>
 
@@ -33,12 +33,10 @@
         <a href="{% url 'store:about' %}" class="text-gray-700 hover:text-pink-500 transition">About</a>
         <a href="{% url 'store:contact' %}" class="text-gray-700 hover:text-pink-500 transition">Contact</a>
         <a href="{% url 'store:cart' %}" class="relative text-gray-700 hover:text-pink-500 transition">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9m5-9v9m4-9v9m4-9l2 9" />
-          </svg>
+          <i class="fas fa-shopping-cart text-lg"></i>
           <span class="absolute -top-2 -right-2 bg-pink-500 text-white text-xs rounded-full px-1">{{ cart_count|default:0 }}</span>
         </a>
+
         {% if user.is_authenticated %}
           <a href="{% url 'store:order_history' %}" class="text-gray-700 hover:text-pink-500 transition">Orders</a>
         {% endif %}
