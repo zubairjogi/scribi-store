@@ -160,7 +160,9 @@ class OrderItem(models.Model):
         return self.get_final_price() * self.quantity
 
     def __str__(self):
-        return f"{self.quantity} x {self.product.name}"
+        product_name = self.product.name if self.product else "Deleted Product"
+        return f"{self.quantity} x {product_name}"
+
 
 
 class Profile(models.Model):
