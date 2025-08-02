@@ -30,7 +30,7 @@
       <!-- Product Image -->
       {% if p.image %}
       <div class="relative overflow-hidden rounded-t-2xl">
-        <img src="{{ p.image.url }}" alt="{{ p.name }}" class="w-full h-60 sm:h-72 object-contain transition-transform duration-700 group-hover:scale-110">
+        <img src="{{ p.image.url }}" loading="lazy" alt="{{ p.name }}" class="w-full h-60 sm:h-72 object-contain transition-transform duration-700 group-hover:scale-110">
         <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
         <!-- Hover Badge -->
         <span class="absolute top-3 right-3 bg-emerald-600 text-white text-xs font-semibold px-3 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-bounce-in">Quick View</span>

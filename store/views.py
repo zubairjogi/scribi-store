@@ -13,12 +13,13 @@ from decimal import Decimal
 from .forms import SignupForm, ShippingForm
 from .models import Profile, Category, Product, Cart, CartItem, Order, OrderItem
 from django.core.mail import send_mail, BadHeaderError
-
+from django.http import HttpResponse
 from django.conf import settings
 
 
 def about(request):
     return render(request, 'store/about.html')
+
 
 def contact(request):
     if request.method == 'POST':
@@ -414,3 +415,9 @@ def order_history(request):
     return render(request, 'store/order_history.html', {
         'orders': orders,
     })
+
+def custom_404_view(request, exception):
+    try:
+        return render(request, 'store/404.html', status=404)
+    except Exception as e:
+        return HttpResponse(f"404 error handler failed: {e}", status=500)

@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-w)7*@^iu6c(js3f4s71=qe!gkt$sx(s^_8==x=-%60ipor^ysb'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['scribi.store', 'www.scribi.store', '13.61.47.151','127.0.0.1']
 

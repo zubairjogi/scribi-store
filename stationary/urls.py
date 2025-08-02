@@ -19,6 +19,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
 from store import views as store_views
+from django.conf.urls import handler404
 
 urlpatterns = [
     path('scribi-secure-admin-panel-9051/', admin.site.urls),
@@ -44,3 +45,5 @@ from django.conf.urls.static import static
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+handler404 = store_views.custom_404_view
