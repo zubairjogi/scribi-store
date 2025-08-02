@@ -23,11 +23,11 @@
       <div class="relative border rounded-xl bg-gray-100 h-96 flex items-center justify-center overflow-hidden shadow-md">
         {% if images and images|length > 0 %}
           <img id="main-img" src="{{ images.0.image.url }}" loading="lazy" alt="{{ images.0.alt_text|default:product.name }}"
-               class="h-full w-full object-contain cursor-pointer transition-transform duration-300 hover:scale-105"
+               class="h-full w-full object-cover cursor-pointer transition-transform duration-300 hover:scale-105"
                onclick="openModal(0)" />
         {% elif product.image %}
           <img id="main-img" src="{{ product.image.url }}" loading="lazy" alt="{{ product.name }} "
-               class="h-full w-full object-contain" />
+               class="h-full w-full object-cover" />
         {% else %}
           <div class="text-gray-400 text-lg">No Image Available</div>
         {% endif %}
