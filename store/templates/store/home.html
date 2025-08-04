@@ -5,6 +5,16 @@
 {% block title %}Home – Scribi{% endblock %}
 
 {% block content %}
+{% if announcement %}
+  <div class="w-full bg-pink-500 text-white py-2 mb-4">
+    <p class="text-center text-sm sm:text-base font-medium px-4">
+      {{ announcement.message }}
+    </p>
+  </div>
+{% endif %}
+
+
+
 <!-- Hero Section with Rotating Images -->
 <section class="relative overflow-hidden rounded-3xl mb-16 shadow-2xl">
   <div class="hero-slider relative h-[30rem] sm:h-96 md:h-[500px] lg:h-[600px]">
@@ -136,7 +146,7 @@
           {% if c.image %}
             <img src="{{ c.image.url }}" alt="{{ c.name }}"
                  loading="lazy"
-                 class="w-full h-60 object-cover group-hover:scale-110 transition-transform duration-500">
+                 class="w-full h-60 object-cover group-hover:scale-110 transition-transform duration-500 sm:object-cover md:object-cover">
           {% else %}
             <div class="w-full h-48 bg-gradient-to-br from-pink-200 via-purple-200 to-blue-200 flex items-center justify-center">
               <span class="text-6xl">📝</span>
@@ -496,6 +506,8 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+
+
 </style>
 
 <script>

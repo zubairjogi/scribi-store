@@ -5,16 +5,12 @@ from .models import (
     Category, Product,
     Cart, CartItem,
     Order, OrderItem,
-    Profile, ProductImage
+    Profile, ProductImage,
+    Announcement
 )
 
 # ——— CATEGORY & PRODUCT —————————————————————————————————————————
 
-@admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
-    list_display   = ('name', 'slug')
-    prepopulated_fields = {'slug': ('name',)}
-    search_fields  = ('name',)
 
 
 class ProductImageInline(admin.TabularInline):
@@ -82,6 +78,11 @@ class ProfileInline(admin.StackedInline):
     can_delete = False
     verbose_name_plural = 'Profile'
 
+@admin.register(Announcement)
+class AnnouncementAdmin(admin.ModelAdmin):
+    list_display = ('message', 'active')  # shows both fields in list view
+    list_filter = ('active',)
+    search_fields = ('message',)
 
 # unregister the default User admin, re‑register with the ProfileInline
 from django.contrib.auth.admin import UserAdmin as DefaultUserAdmin
@@ -90,5 +91,4 @@ admin.site.unregister(User)
 @admin.register(User)
 class UserAdmin(DefaultUserAdmin):
     inlines = [ProfileInline]
-
 

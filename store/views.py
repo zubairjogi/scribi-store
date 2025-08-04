@@ -11,7 +11,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Sum
 from decimal import Decimal
 from .forms import SignupForm, ShippingForm
-from .models import Profile, Category, Product, Cart, CartItem, Order, OrderItem
+from .models import Profile, Category, Product, Cart, CartItem, Order, OrderItem,Announcement
 from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse
 from django.conf import settings
@@ -51,6 +51,7 @@ def home(request):
     """
     Renders the homepage with categories and featured products.
     """
+    announcement = Announcement.objects.filter(active=True).first()
     categories = Category.objects.all()
     featured_products = Product.objects.filter(available=True)[:4]
     
@@ -61,6 +62,7 @@ def home(request):
         cart_count = cart.items.aggregate(total=Sum('quantity'))['total'] or 0
     
     return render(request, 'store/home.html', {
+        'announcement': announcement,
         'categories': categories,
         'featured': featured_products,
         'cart_count': cart_count,
