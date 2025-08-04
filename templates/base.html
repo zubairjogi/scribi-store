@@ -15,21 +15,21 @@
       font-family: 'Quicksand', sans-serif;
     }
 
-.marquee-single {
+.marquee-content {
   display: inline-block;
-  white-space: nowrap;
-  animation: marquee-once 15s linear infinite;
-  transform: translateX(100%);
+  animation: scroll-marquee 15s linear infinite;
 }
 
-@keyframes marquee-once {
+@keyframes scroll-marquee {
   0% {
-    transform: translateX(100%);
+    transform: translateX(0%);
   }
   100% {
-    transform: translateX(-100%);
+    transform: translateX(-50%);
   }
 }
+
+
 
 
 
@@ -109,13 +109,20 @@
       </nav>
     </div>
   </header>
-  {% if announcement %}
+{% if announcement %}
   <div class="bg-pink-500 text-white py-2 w-full overflow-hidden z-40">
-    <div class="marquee-single text-sm sm:text-base font-medium">
-      {{ announcement.message }}
+    <div class="marquee-wrapper relative w-full overflow-hidden">
+      <div class="marquee-content inline-block whitespace-nowrap">
+        <span class="mx-4">{{ announcement.message }}</span>
+        <span class="mx-4">{{ announcement.message }}</span>
+        <span class="mx-4">{{ announcement.message }}</span>
+        <span class="mx-4">{{ announcement.message }}</span>
+      </div>
     </div>
   </div>
 {% endif %}
+
+
 
 
 
