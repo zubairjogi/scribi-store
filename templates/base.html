@@ -14,6 +14,17 @@
     body {
       font-family: 'Quicksand', sans-serif;
     }
+
+  @keyframes marquee {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+  }
+
+  .animate-marquee {
+    display: inline-block;
+    white-space: nowrap;
+    animation: marquee 15s linear infinite;
+  }
   </style>
 </head>
 <body class="min-h-screen flex flex-col bg-pink-50 text-gray-800">
@@ -41,6 +52,8 @@
           <a href="{% url 'store:order_history' %}" class="text-gray-700 hover:text-pink-500 transition">Orders</a>
         {% endif %}
       </nav>
+
+      
 
       <!-- User Auth Links -->
       <div class="hidden md:flex items-center space-x-3">
@@ -88,6 +101,16 @@
       </nav>
     </div>
   </header>
+  {% if announcement %}
+  <div class="bg-pink-500 text-white py-2 w-full overflow-hidden z-40">
+    <div class="max-w-7xl mx-auto">
+      <p class="animate-marquee text-sm sm:text-base font-medium">
+        {{ announcement.message }}
+      </p>
+    </div>
+  </div>
+  {% endif %}
+
 
   <!-- Messages -->
   {% if messages %}

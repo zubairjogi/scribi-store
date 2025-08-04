@@ -1,4 +1,4 @@
-from .models import Cart
+from .models import Cart, Announcement
 from django.db import models  # <-- Add this line
 
 def cart_count(request):
@@ -10,3 +10,8 @@ def cart_count(request):
         except Cart.DoesNotExist:
             count = 0
     return {'cart_count': count}
+
+def active_announcement(request):
+    return {
+        'announcement': Announcement.objects.filter(active=True).first()
+    }
